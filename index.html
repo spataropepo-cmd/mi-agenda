@@ -373,17 +373,15 @@ Reglas:
 - Respondé SOLO con el JSON puro, sin markdown, sin backticks, sin texto adicional.`;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://kmhvlanrwigpaeqwgehw.supabase.co/functions/v1/chat-ai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'anthropic-dangerous-allow-browser': 'true'
+        'Authorization': `Bearer ${SUPABASE_KEY}`
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
         system: systemPrompt,
-        messages: [{ role: 'user', content: text }]
+        userMessage: text
       })
     });
 
